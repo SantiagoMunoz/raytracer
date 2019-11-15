@@ -10,3 +10,7 @@ add_test(NAME tuple_tests COMMAND tuple_tests)
 add_executable(canvas_tests canvas_tests.cpp ${PROJECT_SOURCE_DIR}/src/canvas.cpp ${PROJECT_SOURCE_DIR}/src/tuple.cpp)
 target_link_libraries(canvas_tests gtest gtest_main pthread)
 add_test(NAME canvas_tests COMMAND canvas_tests)
+
+add_executable(matrix_tests matrix_tests.cpp ${PROJECT_SOURCE_DIR}/src/matrix.cpp)
+target_link_libraries(matrix_tests gtest gtest_main pthread)
+add_test(NAME matrix_tests COMMAND matrix_tests)
