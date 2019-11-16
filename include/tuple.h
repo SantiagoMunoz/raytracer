@@ -3,7 +3,7 @@
 
 #include <math.h>
 
-enum tuple_type {POINT, VECTOR};
+enum tuple_type {POINT = 0, VECTOR};
 
 #define EPSILON 0.00001
 inline bool is_equal (const double &A, const double &B)

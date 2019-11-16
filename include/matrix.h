@@ -1,6 +1,8 @@
 #ifndef __MATRIX_H_
 #define __MATRIX_H_
 
+#include "tuple.h"
+
 struct matrix {
 
 matrix(int w, int h): width{w}, height{h}
@@ -34,8 +36,10 @@ matrix(int s): width{s}, height{s}
 	void set(int i, int j, double value);
 
 	matrix operator*(const matrix& A);
+	tuple operator*(const tuple&A);
 
 	matrix get_transpose();
+	matrix get_submatrix(int row, int column);
 
 private:
 	int width;
