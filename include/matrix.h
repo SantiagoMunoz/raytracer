@@ -40,11 +40,15 @@ matrix(int s): width{s}, height{s}
 
 	matrix get_transpose();
 	matrix get_submatrix(int row, int column);
+	double det();
 
 private:
 	int width;
 	int height;
 	double** elems;
+	double det2x2();
+	double minor3x3(int row, int column);
+	double cofactor3x3(int row, int column);
 };
 
 bool operator==(const matrix& A, const matrix& B);

@@ -1,8 +1,28 @@
 #include "matrix.h"
 
-double det2x2(const matrix& A)
+double matrix::det2x2()
 {
-	return (A.get(0,0)*A.get(1,1)) - (A.get(1,0)*A.get(0,1));
+	return (elems[0][0]*elems[1][1]) - (elems[1][0]*elems[0][1]);
+}
+
+double matrix::minor3x3(int row, int column)
+{
+	return get_submatrix(row, column).det2x2();
+}
+
+double matrix::cofactor3x3(int row, int column)
+{
+	return ((row+column) % 2 ? 1 : -1)*minor3x3(row, column);
+}
+
+double matrix::det()
+{
+	if (width == 2)
+		return det2x2();
+	double d = 0.0;
+	for(int i=0; i<width; i++)
+		d += elems[0][i]*get_submatrix(0,i).det()*(i % 2 ? 1 : -1);
+	return d;
 }
 
 int matrix::get_width() const
