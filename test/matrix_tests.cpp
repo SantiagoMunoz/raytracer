@@ -88,6 +88,49 @@ TEST(MatrixTest, Determinant)
 	ASSERT_EQ(m.det(), -4071);
 }
 
+TEST(MatrixTest, Inverse)
+{
+	matrix m{4};
+	m.set(0,0, -5.0);
+	m.set(0,1, 2.0);
+	m.set(0,2, 6.0);
+	m.set(0,3, -8.0);
+	m.set(1,0, 1.0);
+	m.set(1,1, -5.0);
+	m.set(1,2, 1.0);
+	m.set(1,3, 8.0);
+	m.set(2,0, 7.0);
+	m.set(2,1, 7.0);
+	m.set(2,2, -6.0);
+	m.set(2,3, -7.0);
+	m.set(3,0, 1.0);
+	m.set(3,1, -3.0);
+	m.set(3,2, 7.0);
+	m.set(3,3, 4.0);
+
+	ASSERT_TRUE(is_equal(m.det(), 532));
+
+	matrix inv = m.inverse();
+
+	ASSERT_TRUE(is_equal(inv.get(0,0),0.21805));
+	ASSERT_TRUE(is_equal(inv.get(0,1),0.45113));
+	ASSERT_TRUE(is_equal(inv.get(0,2),0.24060));
+	ASSERT_TRUE(is_equal(inv.get(0,3),-0.04511));
+	ASSERT_TRUE(is_equal(inv.get(1,0),-0.80827));
+	ASSERT_TRUE(is_equal(inv.get(1,1),-1.45677));
+	ASSERT_TRUE(is_equal(inv.get(1,2),-0.44361));
+	ASSERT_TRUE(is_equal(inv.get(1,3),0.52068));
+	ASSERT_TRUE(is_equal(inv.get(2,0),-0.07895));
+	ASSERT_TRUE(is_equal(inv.get(2,1),-0.22368));
+	ASSERT_TRUE(is_equal(inv.get(2,2),-0.05263));
+	ASSERT_TRUE(is_equal(inv.get(2,3),0.19737));
+	ASSERT_TRUE(is_equal(inv.get(3,0),-0.52256));
+	ASSERT_TRUE(is_equal(inv.get(3,1),-0.81391));
+	ASSERT_TRUE(is_equal(inv.get(3,2),-0.30075));
+	ASSERT_TRUE(is_equal(inv.get(3,3),0.30639));
+
+}
+
 int main(int argc, char **argv)
 {
 	testing::InitGoogleTest(&argc, argv);

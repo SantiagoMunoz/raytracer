@@ -41,6 +41,7 @@ matrix(int s): width{s}, height{s}
 	matrix get_transpose();
 	matrix get_submatrix(int row, int column);
 	double det();
+	matrix inverse();
 
 private:
 	int width;

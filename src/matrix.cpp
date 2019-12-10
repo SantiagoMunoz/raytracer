@@ -25,6 +25,20 @@ double matrix::det()
 	return d;
 }
 
+matrix matrix::inverse()
+{
+	double d = det();
+	matrix inverse{width, width};
+
+	for (int j=0; j < height; j++) {
+		for (int i=0; i < width; i++) {
+			inverse.set(i, j, (get_submatrix(j, i).det() * ((i+j) % 2 ? 1 : -1))/d);
+		}
+	}
+
+	return inverse;
+}
+
 int matrix::get_width() const
 {
 	return width;
