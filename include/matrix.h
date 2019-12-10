@@ -1,7 +1,12 @@
 #ifndef __MATRIX_H_
 #define __MATRIX_H_
 
+#include <cmath>
 #include "tuple.h"
+
+#ifndef PI
+#define PI 3.14159265
+#endif
 
 struct matrix {
 
@@ -43,6 +48,7 @@ matrix(int s): width{s}, height{s}
 	double det();
 	matrix inverse();
 
+
 private:
 	int width;
 	int height;
@@ -53,5 +59,12 @@ private:
 };
 
 bool operator==(const matrix& A, const matrix& B);
+
+matrix translation(double x, double y, double z);
+matrix scaling(double x, double y, double z);
+matrix rotate_x(double angle);
+matrix rotate_y(double angle);
+matrix rotate_z(double angle);
+matrix shear(double x_y, double x_z, double y_x, double y_z, double z_x, double z_y);
 
 #endif /* __MATRIX_H_ */

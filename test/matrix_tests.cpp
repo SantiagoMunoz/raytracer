@@ -131,6 +131,50 @@ TEST(MatrixTest, Inverse)
 
 }
 
+TEST(MatrixTest, MultiplyByInverse)
+{
+	matrix A{4};
+	matrix B{4};
+
+	A.set(0,0, 3);
+	A.set(0,1, -9);
+	A.set(0,2, 7);
+	A.set(0,3, 3);
+	A.set(1,0, 3);
+	A.set(1,1, -8);
+	A.set(1,2, 3);
+	A.set(1,3, -9);
+	A.set(2,0, -4);
+	A.set(2,1, 4);
+	A.set(2,2, 4);
+	A.set(2,3, 1);
+	A.set(3,0, -6);
+	A.set(3,1, 5);
+	A.set(3,2, -1);
+	A.set(3,3, 1);
+
+	B.set(0,0, 8);
+	B.set(0,1, 2);
+	B.set(0,2, 2);
+	B.set(0,3, 2);
+	B.set(1,0, 3);
+	B.set(1,1, -1);
+	B.set(1,2, 7);
+	B.set(1,3, 0);
+	B.set(2,0, 7);
+	B.set(2,1, 0);
+	B.set(2,2, 5);
+	B.set(2,3, 4);
+	B.set(3,0, 6);
+	B.set(3,1, -2);
+	B.set(3,2, 0);
+	B.set(3,3, 5);
+
+	matrix C = A * B;
+
+	ASSERT_TRUE( (C*B.inverse()) == A);
+}
+
 int main(int argc, char **argv)
 {
 	testing::InitGoogleTest(&argc, argv);
