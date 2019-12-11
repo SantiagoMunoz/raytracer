@@ -5,15 +5,14 @@
 #include "ray.h"
 #include <vector>
 
-struct sphere
+struct sphere : object
 {
-
 	sphere (tuple center, double radius) : center{center}, radius{radius} {}
+
 	tuple center;
 	double radius;
 
-	std::vector<double> collides(ray &r);
-	
+	std::vector<double> get_collisions(ray &r) override;
 };
 
 #endif /* __SPHERE_H_ */

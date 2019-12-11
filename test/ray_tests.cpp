@@ -31,7 +31,7 @@ TEST(RayTest, IntersectionWithSphere)
 	ray r{tuple{0,0,-5, POINT}, tuple{0,0,1, VECTOR}};
 	sphere s{tuple{0, 0, 0, POINT}, 1.0};
 
-	auto i = s.collides(r);
+	auto i = s.get_collisions(r);
 
 	ASSERT_EQ(i.size(), 2);
 	ASSERT_TRUE(is_equal(i[0], 6.0));

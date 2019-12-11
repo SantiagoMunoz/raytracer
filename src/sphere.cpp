@@ -1,6 +1,6 @@
 #include "sphere.h"
 
-std::vector<double> sphere::collides(ray &r)
+std::vector<double> sphere::get_collisions(ray &r)
 {
 	std::vector<double> ret;
 	double a = (r.direction.x)*(r.direction.x) + (r.direction.y)*(r.direction.y) + (r.direction.z)*(r.direction.z);

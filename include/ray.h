@@ -2,6 +2,9 @@
 #define __RAY_H_
 
 #include "tuple.h"
+#include <vector>
+
+struct intersection;
 
 struct ray
 {
@@ -9,10 +12,22 @@ struct ray
 
 	tuple origin;
 	tuple direction;
-
+	std::vector<intersection> collisions;
+	
 	tuple position(double t);
 
 };
 
+struct object {
+	virtual std::vector<double> get_collisions(ray &r) = 0;
+};
+
+struct intersection
+{
+	intersection (double t, object *obj) : t{t},obj{obj}  {}
+	double t;
+	object *obj;
+
+};
 
 #endif /* __RAY_H_ */
