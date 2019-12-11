@@ -3,8 +3,17 @@
 
 #include "tuple.h"
 #include <vector>
+#include <optional>
 
-struct intersection;
+struct object;
+
+struct intersection
+{
+	intersection (double t, object *obj) : t{t},obj{obj}  {}
+	double t;
+	object *obj;
+
+};
 
 struct ray
 {
@@ -15,6 +24,8 @@ struct ray
 	std::vector<intersection> collisions;
 	
 	tuple position(double t);
+	void collide_with(object *o);
+	std::optional<intersection> get_hit();
 
 };
 
@@ -22,12 +33,7 @@ struct object {
 	virtual std::vector<double> get_collisions(ray &r) = 0;
 };
 
-struct intersection
-{
-	intersection (double t, object *obj) : t{t},obj{obj}  {}
-	double t;
-	object *obj;
 
-};
+
 
 #endif /* __RAY_H_ */

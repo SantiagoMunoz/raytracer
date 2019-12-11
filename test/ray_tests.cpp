@@ -37,9 +37,18 @@ TEST(RayTest, IntersectionWithSphere)
 	ASSERT_TRUE(is_equal(i[0], 6.0));
 	ASSERT_TRUE(is_equal(i[1], 4.0));
 
-
 }
 
+TEST(RayTest, GetSphereHit)
+{
+	ray r{tuple{0,0,-5, POINT}, tuple{0,0,1, VECTOR}};
+	sphere s{tuple{0, 0, 0, POINT}, 1.0};
+
+	r.collide_with(&s);
+
+	ASSERT_TRUE(is_equal(r.get_hit()->t, 4.0));
+
+}
 int main(int argc, char **argv)
 {
 	testing::InitGoogleTest(&argc, argv);
