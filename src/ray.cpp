@@ -34,3 +34,9 @@ std::optional<intersection> ray::get_hit()
 	return std::make_optional<intersection>(*current_min);
 
 }
+
+ray ray::get_transformed(matrix t)
+{
+	ray r{t*origin, t*direction};
+	return r;
+}

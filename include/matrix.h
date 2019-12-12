@@ -60,6 +60,7 @@ private:
 
 bool operator==(const matrix& A, const matrix& B);
 
+/* Transformations */
 matrix translation(double x, double y, double z);
 matrix scaling(double x, double y, double z);
 matrix rotate_x(double angle);

@@ -4,6 +4,7 @@
 #include "tuple.h"
 #include "ray.h"
 #include <vector>
+#include <optional>
 
 struct sphere : object
 {
@@ -13,6 +14,8 @@ struct sphere : object
 	double radius;
 
 	std::vector<double> get_collisions(ray &r) override;
+	ray get_unary_normal_at(tuple &point) override;
+
 };
 
 #endif /* __SPHERE_H_ */

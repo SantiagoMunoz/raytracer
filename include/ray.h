@@ -2,6 +2,7 @@
 #define __RAY_H_
 
 #include "tuple.h"
+#include "matrix.h"
 #include <vector>
 #include <optional>
 
@@ -24,16 +25,14 @@ struct ray
 	std::vector<intersection> collisions;
 	
 	tuple position(double t);
+	ray get_transformed(matrix transformation);
 	void collide_with(object *o);
 	std::optional<intersection> get_hit();
-
 };
 
 struct object {
 	virtual std::vector<double> get_collisions(ray &r) = 0;
+	virtual ray get_unary_normal_at(tuple &point) = 0;
 };
-
-
-
 
 #endif /* __RAY_H_ */

@@ -17,3 +17,11 @@ std::vector<double> sphere::get_collisions(ray &r)
 	
 	return ret;
 }
+
+ray sphere::get_unary_normal_at(tuple &point)
+{
+	tuple direction = point - center;
+	ray r{point, direction.unary()};
+
+	return r;
+}
