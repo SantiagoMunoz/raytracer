@@ -28,6 +28,7 @@ struct ray
 	ray get_transformed(matrix transformation);
 	void collide_with(object *o);
 	std::optional<intersection> get_hit();
+	ray reflect(tuple &normal);
 };
 
 struct object {

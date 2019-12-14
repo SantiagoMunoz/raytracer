@@ -40,3 +40,9 @@ ray ray::get_transformed(matrix t)
 	ray r{t*origin, t*direction};
 	return r;
 }
+
+ray ray::reflect(tuple &normal)
+{
+	ray r{origin, direction - normal*2*(direction*normal)};
+	return r;
+}

@@ -15,7 +15,6 @@ struct sphere : object
 
 	std::vector<double> get_collisions(ray &r) override;
 	ray get_unary_normal_at(tuple &point) override;
-
 };
 
 #endif /* __SPHERE_H_ */

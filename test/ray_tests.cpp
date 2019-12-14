@@ -71,6 +71,36 @@ TEST(RayTest, ScaleRay)
 	ASSERT_TRUE(t2 == r2.direction);
 }
 
+TEST(RayTest, SphereNormal)
+{
+	sphere s{tuple{0, 0, 0, POINT}, 1.0};
+
+	tuple p{1, 0, 0, POINT};
+	tuple n{1, 0, 0, VECTOR};
+	ray r = s.get_unary_normal_at(p);
+	ASSERT_TRUE(r.direction == n);
+	ASSERT_TRUE(r.origin == p);
+
+	tuple p2{sqrt(3)/3, sqrt(3)/3, sqrt(3)/3, POINT};
+	tuple n2{sqrt(3)/3, sqrt(3)/3, sqrt(3)/3, VECTOR};
+	ray r2 = s.get_unary_normal_at(p2);
+	ASSERT_TRUE(r2.direction == n2);
+	ASSERT_TRUE(r2.origin == p2);
+}
+
+TEST(RayTest, Reflect)
+{
+	ray r1{tuple{0, 0, -1, POINT}, tuple{1, -1, 0, VECTOR}};
+	tuple n1{0, 1, 0, VECTOR};
+	tuple ref1{1, 1, 0, VECTOR};
+	ASSERT_TRUE(r1.reflect(n1).direction == ref1);
+
+	ray r2{tuple{0, 0, -1, POINT}, tuple{0, -1, 0, VECTOR}};
+	tuple n2{sqrt(2)/2, sqrt(2)/2, 0, VECTOR};
+	tuple ref2{1, 0, 0, VECTOR};
+	ASSERT_TRUE(r2.reflect(n2).direction == ref2);
+}
+
 int main(int argc, char **argv)
 {
 	testing::InitGoogleTest(&argc, argv);
