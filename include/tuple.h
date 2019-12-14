@@ -36,7 +36,7 @@ struct tuple {
 bool operator==(const tuple& A, const tuple& B);
 
 struct color {
-	color ( double r, double g, double b) : r{r}, g{g}, b{b} {}
+	color (double r, double g, double b) : r{r}, g{g}, b{b} {}
 	color () : r{0}, g{0}, b{0} {}
 
 	double r;

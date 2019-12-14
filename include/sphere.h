@@ -10,6 +10,10 @@ struct sphere : object
 {
 	sphere (tuple center, double radius) : center{center}, radius{radius} {}
 
+	sphere (tuple center, double radius, material m) : center{center}, radius{radius} {
+		mat = m;
+	}
+
 	tuple center;
 	double radius;
 

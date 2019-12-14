@@ -3,6 +3,7 @@
 
 #include "tuple.h"
 #include "matrix.h"
+#include "material.h"
 #include <vector>
 #include <optional>
 
@@ -32,6 +33,10 @@ struct ray
 };
 
 struct object {
+	object () : mat{material{color{1, 0, 0}, 0.1, 0.9, 0.9, 200}} {}
+
+	material mat;
+
 	virtual std::vector<double> get_collisions(ray &r) = 0;
 	virtual ray get_unary_normal_at(tuple &point) = 0;
 };
