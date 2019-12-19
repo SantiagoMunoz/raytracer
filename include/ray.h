@@ -4,6 +4,7 @@
 #include "tuple.h"
 #include "matrix.h"
 #include "material.h"
+#include "light.h"
 #include <vector>
 #include <optional>
 
@@ -30,10 +31,12 @@ struct ray
 	void collide_with(object *o);
 	std::optional<intersection> get_hit();
 	ray reflect(tuple &normal);
+
+	color get_illumination(light &lightsource);
 };
 
 struct object {
-	object () : mat{material{color{1, 0, 0}, 0.1, 0.9, 0.9, 200}} {}
+	object () : mat{material()} {}
 
 	material mat;
 

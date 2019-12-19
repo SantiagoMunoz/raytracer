@@ -101,6 +101,22 @@ TEST(RayTest, Reflect)
 	ASSERT_TRUE(r2.reflect(n2).direction == ref2);
 }
 
+TEST(RayTest, CalculateColorAtPerpendicular)
+{
+	ray r{tuple{0,0,-1, POINT}, tuple{0,0,1, VECTOR}};
+	sphere s{tuple{0,0,1, POINT}, 1.0};
+	light l{color{1,1,1},tuple{0,0,-10, POINT}};
+
+	r.collide_with(&s);
+
+	color result = r.get_illumination(l);
+
+	ASSERT_TRUE(is_equal(result.r, 1.9));
+	ASSERT_TRUE(is_equal(result.g, 1.9));
+	ASSERT_TRUE(is_equal(result.b, 1.9));
+
+}
+
 int main(int argc, char **argv)
 {
 	testing::InitGoogleTest(&argc, argv);

@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 
 	canvas c{WIDTH, HEIGHT};
 	color no_color{0, 0, 0};
-	color red{255,0,0};
+	color red{1,0,0};
 
 	sphere s{tuple{WIDTH/2, HEIGHT/2, 100, POINT}, 80};
 
