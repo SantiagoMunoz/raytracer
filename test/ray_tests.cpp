@@ -117,6 +117,67 @@ TEST(RayTest, CalculateColorAtPerpendicular)
 
 }
 
+TEST(RayTest, CalculateColorAt45)
+{
+	ray r{tuple{0,0,-1, POINT}, tuple{0, -sqrt(2)/2, sqrt(2)/2, VECTOR}};
+	sphere s{tuple{0, -sqrt(2)/2, sqrt(2)/2, VECTOR}, 1.0};
+	light l{color{1,1,1}, tuple{0, -sqrt(2)/2, -10, POINT}};
+
+	r.collide_with(&s);
+
+	color result = r.get_illumination(l);
+
+	ASSERT_TRUE(is_equal(result.r, 1.0));
+	ASSERT_TRUE(is_equal(result.g, 1.0));
+	ASSERT_TRUE(is_equal(result.b, 1.0));
+}
+
+TEST(RayTest, CalculateColorAtPerpendicularLightAt45)
+{
+	ray r{tuple{0,0,-1, POINT}, tuple{0,0,1, VECTOR}};
+	sphere s{tuple{0,0,1, POINT}, 1.0};
+	light l{color{1,1,1},tuple{0,10,-10, POINT}};
+
+	r.collide_with(&s);
+
+	color result = r.get_illumination(l);
+
+	ASSERT_TRUE(is_equal(result.r, 0.7364));
+	ASSERT_TRUE(is_equal(result.g, 0.7364));
+	ASSERT_TRUE(is_equal(result.b, 0.7364));
+}
+
+TEST(RayTest, CalculateColorAt45LightatOpposite45)
+{
+	ray r{tuple{0,-1,-1, POINT}, tuple{0, sqrt(2)/2, sqrt(2)/2, VECTOR}};
+	sphere s{tuple{0,0,1, POINT}, 1.0};
+	light l{color{1,1,1},tuple{0,10,-10, POINT}};
+
+	r.collide_with(&s);
+
+	color result = r.get_illumination(l);
+
+	ASSERT_TRUE(is_equal(result.r, 1.6364));
+	ASSERT_TRUE(is_equal(result.g, 1.6364));
+	ASSERT_TRUE(is_equal(result.b, 1.6364));
+}
+
+TEST(RayTest, CalculateColorAtPerpendicularLightBehind)
+{
+	ray r{tuple{0,0,-1, POINT}, tuple{0,0,1, VECTOR}};
+	sphere s{tuple{0,0,1, POINT}, 1.0};
+	light l{color{1,1,1},tuple{0,0,10, POINT}};
+
+	r.collide_with(&s);
+
+	color result = r.get_illumination(l);
+
+	ASSERT_TRUE(is_equal(result.r, 0.1));
+	ASSERT_TRUE(is_equal(result.g, 0.1));
+	ASSERT_TRUE(is_equal(result.b, 0.1));
+
+}
+
 int main(int argc, char **argv)
 {
 	testing::InitGoogleTest(&argc, argv);
