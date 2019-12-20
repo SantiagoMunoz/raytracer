@@ -143,7 +143,7 @@ matrix scaling(double x, double y, double z)
 	t.set(0,0, x);
 	t.set(1,1, y);
 	t.set(2,2, z);
-	
+
 	return t;
 }
 

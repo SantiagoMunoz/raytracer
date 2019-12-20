@@ -7,4 +7,5 @@ ${PROJECT_SOURCE_DIR}/src/tuple.cpp
 ${PROJECT_SOURCE_DIR}/src/canvas.cpp 
 ${PROJECT_SOURCE_DIR}/src/matrix.cpp
 ${PROJECT_SOURCE_DIR}/src/ray.cpp
-${PROJECT_SOURCE_DIR}/src/sphere.cpp )
+${PROJECT_SOURCE_DIR}/src/sphere.cpp
+${PROJECT_SOURCE_DIR}/src/world.cpp)

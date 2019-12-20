@@ -25,7 +25,7 @@ struct ray
 	tuple origin;
 	tuple direction;
 	std::vector<intersection> collisions;
-	
+
 	tuple position(double t);
 	ray get_transformed(matrix transformation);
 	void collide_with(object *o);
