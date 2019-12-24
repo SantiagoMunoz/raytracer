@@ -15,16 +15,17 @@ void world::render()
 
 	tuple origin = (cam->pos + horizontal_stride*(cam->screen->width/2) + vertical_stride*(cam->screen->height/2)) - cam->dir*cam->depth;
 	tuple pixel_pos = origin;
+	bool inShadow;
 	for (int j=0; j < cam->screen->height; j++) {
 		for (int i=0; i < cam->screen->width; i++) {
-	        pixel_pos = cam->pos + vertical_stride*j + horizontal_stride*i;
+			pixel_pos = cam->pos + vertical_stride*j + horizontal_stride*i;
 			ray r{origin, (pixel_pos - origin).unary()};
 
-			for(std::vector<object*>::iterator it = objects.begin(); it < objects.end(); it++) {
-				r.collide_with(*it);
-			}
+			r.collide_with(&objects);
 
-			illumination = r.get_illumination(lightsources[0]);
+			//Handle shadows
+			inShadow = false;
+			illumination = r.get_illumination(lightsources[0], inShadow);
 			cam->screen->set_pixel(j, i, illumination);
 		}
 	}

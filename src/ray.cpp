@@ -15,6 +15,12 @@ void ray::collide_with(object *o)
 		collisions.push_back(intersection{(*it), o});
 }
 
+void ray::collide_with(std::vector<object*> *objects)
+{
+	for(std::vector<object*>::iterator it = objects->begin(); it < objects->end(); it++)
+		collide_with(*it);
+}
+
 std::optional<intersection> ray::get_hit()
 {
 	intersection *current_min;
@@ -48,7 +54,7 @@ ray ray::reflect(tuple &normal)
 	return r;
 }
 
-color ray::get_illumination(light &lightsource)
+color ray::get_illumination(light &lightsource, bool inShadow)
 {
 	/* First version: Phong's reflection model with no secondary rays. Whatever is hit first determines the result */
 	std::optional<intersection> hit = get_hit();
@@ -66,6 +72,9 @@ color ray::get_illumination(light &lightsource)
 	color ambient =  effective_color * hit->obj->mat.ambient;
 	color diffuse{0, 0, 0};
 	color specular{0, 0, 0};
+
+	if(inShadow)
+		return ambient;
 
 	if (ldotn > 0) {
 		diffuse = effective_color * hit->obj->mat.diffuse * ldotn;

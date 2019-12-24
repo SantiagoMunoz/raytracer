@@ -109,7 +109,7 @@ TEST(RayTest, CalculateColorAtPerpendicular)
 
 	r.collide_with(&s);
 
-	color result = r.get_illumination(l);
+	color result = r.get_illumination(l, false);
 
 	ASSERT_TRUE(is_equal(result.r, 1.9));
 	ASSERT_TRUE(is_equal(result.g, 1.9));
@@ -125,7 +125,7 @@ TEST(RayTest, CalculateColorAt45)
 
 	r.collide_with(&s);
 
-	color result = r.get_illumination(l);
+	color result = r.get_illumination(l, false);
 
 	ASSERT_TRUE(is_equal(result.r, 1.0));
 	ASSERT_TRUE(is_equal(result.g, 1.0));
@@ -140,7 +140,7 @@ TEST(RayTest, CalculateColorAtPerpendicularLightAt45)
 
 	r.collide_with(&s);
 
-	color result = r.get_illumination(l);
+	color result = r.get_illumination(l, false);
 
 	ASSERT_TRUE(is_equal(result.r, 0.7364));
 	ASSERT_TRUE(is_equal(result.g, 0.7364));
@@ -155,7 +155,7 @@ TEST(RayTest, CalculateColorAt45LightatOpposite45)
 
 	r.collide_with(&s);
 
-	color result = r.get_illumination(l);
+	color result = r.get_illumination(l, false);
 
 	ASSERT_TRUE(is_equal(result.r, 1.6364));
 	ASSERT_TRUE(is_equal(result.g, 1.6364));
@@ -170,7 +170,7 @@ TEST(RayTest, CalculateColorAtPerpendicularLightBehind)
 
 	r.collide_with(&s);
 
-	color result = r.get_illumination(l);
+	color result = r.get_illumination(l, false);
 
 	ASSERT_TRUE(is_equal(result.r, 0.1));
 	ASSERT_TRUE(is_equal(result.g, 0.1));
