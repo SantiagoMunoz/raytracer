@@ -16,7 +16,7 @@ matrix(int w, int h): width{w}, height{h}
 	for(int i=0; i < height; i++)
 		elems[i] = new double[width];
 }
-	
+
 matrix(int s): width{s}, height{s}
 {
 	elems = new double*[height];

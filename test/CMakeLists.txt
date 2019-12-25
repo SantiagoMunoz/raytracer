@@ -22,3 +22,7 @@ add_test(NAME transformation_tests COMMAND transformation_tests)
 add_executable(ray_tests ray_tests.cpp ${PROJECT_SOURCE_DIR}/src/matrix.cpp ${PROJECT_SOURCE_DIR}/src/tuple.cpp ${PROJECT_SOURCE_DIR}/src/ray.cpp ${PROJECT_SOURCE_DIR}/src/sphere.cpp)
 target_link_libraries(ray_tests gtest gtest_main pthread)
 add_test(NAME ray_tests COMMAND ray_tests)
+
+add_executable(plane_tests plane_tests.cpp ${PROJECT_SOURCE_DIR}/src/matrix.cpp ${PROJECT_SOURCE_DIR}/src/tuple.cpp ${PROJECT_SOURCE_DIR}/src/ray.cpp ${PROJECT_SOURCE_DIR}/src/sphere.cpp ${PROJECT_SOURCE_DIR}/src/plane.cpp)
+target_link_libraries(plane_tests gtest gtest_main pthread)
+add_test(NAME plane_tests COMMAND plane_tests)
