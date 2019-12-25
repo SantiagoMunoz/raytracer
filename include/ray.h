@@ -29,10 +29,10 @@ struct ray
 	tuple position(double t);
 	ray get_transformed(matrix transformation);
 	void collide_with(object *o);
+	void collide_with(std::vector<object*> *objects);
 	std::optional<intersection> get_hit();
 	ray reflect(tuple &normal);
-
-	color get_illumination(light &lightsource);
+	color get_illumination(light &lightsource, bool inShadow);
 };
 
 struct object {
