@@ -27,7 +27,9 @@ struct ray
 	std::vector<intersection> collisions;
 
 	tuple position(double t);
+
 	ray get_transformed(matrix transformation);
+
 	void collide_with(object *o);
 	void collide_with(std::vector<object*> *objects);
 	std::optional<intersection> get_hit();

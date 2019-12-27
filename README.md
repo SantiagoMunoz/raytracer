@@ -6,7 +6,7 @@
 * [x] Rays intersecting spheres
 * [x] Light and Shadow
 * [X] Abstract camera and world
-* [ ] Support planes
+* [X] Support planes
 * [ ] Shadows
 * [ ] Cubes
 * [ ] Secondary reflections

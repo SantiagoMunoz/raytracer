@@ -12,13 +12,14 @@ std::vector<double> plane::get_collisions(ray &r)
        Rotation
     */
     //Translation: From origin to actual trcorner
+//    ray m_ray = r.get_translated(trcorner.x, -trcorner.y, -trcorner.z);
     ray m_ray = r.get_transformed(translation(trcorner.x, trcorner.y, trcorner.z).inverse());
     //Rotation: From 0,0,1 to normal
     //X axis
-    double angle = PI/2 + acos(normal.y);
+    double angle = -PI/2 - acos(normal.y);
     m_ray = m_ray.get_transformed(rotate_x(angle).inverse());
     //Y axis
-    angle = -PI/2 + acos(normal.x);
+    angle = PI/2 + acos(normal.x);
     m_ray = m_ray.get_transformed(rotate_y(angle).inverse());
 
     /* Get collision (if any!) */

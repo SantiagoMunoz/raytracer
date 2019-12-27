@@ -10,6 +10,9 @@
 struct plane : object
 {
     plane (tuple trcorner, tuple normal, double width, double height) : trcorner(trcorner), normal(normal), width(width), height(height) {}
+    plane (tuple trcorner, tuple normal, double width, double height, material m) : trcorner(trcorner), normal(normal), width(width), height(height) {
+        mat = m;
+    }
 
     tuple trcorner;
     tuple normal;

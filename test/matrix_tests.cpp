@@ -60,7 +60,7 @@ TEST(MatrixTest, SubMatrix)
 	matrix s = m.get_submatrix(2, 3);
 	matrix r{3};
 	r.set(2,2, 0.0);
-	
+
 	ASSERT_TRUE(s == r);
 
 }

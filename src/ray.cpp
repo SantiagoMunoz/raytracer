@@ -19,26 +19,39 @@ void ray::collide_with(std::vector<object*> *objects)
 {
 	for(std::vector<object*>::iterator it = objects->begin(); it < objects->end(); it++)
 		collide_with(*it);
+
+	//if (get_hit() != std::nullopt) {
+		//tuple pos = position(get_hit()->t);
+		////To avoid acne, move a little hit away from the object
+		//pos = pos + get_hit()->obj->get_unary_normal_at(pos).direction * 0.01;
+		//ray to_lightsource = lightsource.origin - pos;
+		//to_lightsource.collide_with(objects);
+		//if (to_lightsource.get_hit() != std::nullopt)
+			//get_hit()->inShadow = true;
+	//}
 }
 
 std::optional<intersection> ray::get_hit()
 {
-	intersection *current_min;
+	intersection *current_min = NULL;
 	std::vector<intersection>::iterator it;
 
 	if (collisions.size() == 0)
 		return std::nullopt;
 
 	for(it = collisions.begin(); it < collisions.end(); it++) {
-		if (it == collisions.begin()) {
+		if ((*it).t < 0)
+			continue;
+		if (!current_min)
 			current_min = &(*it);
-		} else {
-			if ((*it).t < current_min->t)
-				current_min = &(*it);
-		}
+		else if ((*it).t < current_min->t)
+			current_min = &(*it);
 	}
 
-	return std::make_optional<intersection>(*current_min);
+	if (!current_min)
+		return std::nullopt;
+	else
+		return std::make_optional<intersection>(*current_min);
 
 }
 
@@ -59,7 +72,7 @@ color ray::get_illumination(light &lightsource, bool inShadow)
 	/* First version: Phong's reflection model with no secondary rays. Whatever is hit first determines the result */
 	std::optional<intersection> hit = get_hit();
 
-	if (hit == std::nullopt)
+	if ((hit == std::nullopt) || (hit->t < 0))
 		return color{0, 0, 0};
 
 	tuple pos = position(hit->t);

@@ -14,7 +14,7 @@ std::vector<double> sphere::get_collisions(ray &r)
 		if (!is_equal(t1, t2))
 			ret.push_back(t2);
 	}
-	
+
 	return ret;
 }
 

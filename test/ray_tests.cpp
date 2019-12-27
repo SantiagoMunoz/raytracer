@@ -178,6 +178,39 @@ TEST(RayTest, CalculateColorAtPerpendicularLightBehind)
 
 }
 
+TEST(RayTest, RotateRayX)
+{
+	ray r{tuple{0,0,0, POINT}, tuple{0,0,1,VECTOR}};
+
+	ray r2 = r.get_transformed(rotate_x(PI/4));
+
+	ASSERT_TRUE(is_equal(r2.direction.x, 0));
+	ASSERT_TRUE(is_equal(r2.direction.y, -sqrt(2)/2));
+	ASSERT_TRUE(is_equal(r2.direction.z, sqrt(2)/2));
+}
+
+TEST(RayTest, RotateRayY)
+{
+	ray r{tuple{0,0,0, POINT}, tuple{0,0,1,VECTOR}};
+
+	ray r2 = r.get_transformed(rotate_y(PI/4));
+
+	ASSERT_TRUE(is_equal(r2.direction.x, sqrt(2)/2));
+	ASSERT_TRUE(is_equal(r2.direction.y, 0));
+	ASSERT_TRUE(is_equal(r2.direction.z, sqrt(2)/2));
+}
+
+TEST(RayTest, RotateRayZ)
+{
+	ray r{tuple{0,0,0, POINT}, tuple{1,0,0,VECTOR}};
+
+	ray r2 = r.get_transformed(rotate_z(PI/4));
+
+	ASSERT_TRUE(is_equal(r2.direction.x, sqrt(2)/2));
+	ASSERT_TRUE(is_equal(r2.direction.y, sqrt(2)/2));
+	ASSERT_TRUE(is_equal(r2.direction.z, 0));
+}
+
 int main(int argc, char **argv)
 {
 	testing::InitGoogleTest(&argc, argv);
