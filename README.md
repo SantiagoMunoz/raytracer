@@ -7,7 +7,7 @@
 * [x] Light and Shadow
 * [X] Abstract camera and world
 * [X] Support planes
-* [ ] Shadows
+* [x] Shadows
 * [ ] Cubes
 * [ ] Secondary reflections
 

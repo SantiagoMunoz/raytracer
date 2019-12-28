@@ -12,10 +12,9 @@ struct object;
 
 struct intersection
 {
-	intersection (double t, object *obj) : t{t},obj{obj}  {}
+	intersection (double t, object *obj) : t{t},obj{obj} {}
 	double t;
 	object *obj;
-
 };
 
 struct ray
