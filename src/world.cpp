@@ -29,17 +29,36 @@ void camera::render(world* w)
 			r.collide_with(&(w->objects));
 			//Handle shadows
 			inShadow = false;
+			illumination = color{0,0,0};
 			if (r.get_hit() != std::nullopt) {
-				tuple collision_point = r.position(r.get_hit()->t) + r.get_hit()->obj->get_unary_normal_at(collision_point).direction*0.05;
+				tuple collision_point = r.position(r.get_hit()->t);
+				collision_point = collision_point + r.get_hit()->obj->get_unary_normal_at(collision_point).direction*0.05;
 				collision_point.type = POINT;
-				ray shadow_ray{collision_point, (w->lightsources[0].position - collision_point).unary()};
 
+    			ray shadow_ray{collision_point, (w->lightsources[0].position - collision_point).unary()};
 				shadow_ray.collide_with(&(w->objects));
-
 				if (shadow_ray.get_hit())
 					inShadow = true;
+
+				if (r.get_hit()->obj->mat.reflectiveness > 0.05) {
+					tuple reflected_dir = (r.get_hit()->obj->get_unary_normal_at(collision_point).direction);
+					ray reflected_ray = r.reflect(reflected_dir);
+					reflected_ray.origin = collision_point;
+					reflected_ray.collide_with(&(w->objects));
+
+					if (reflected_ray.get_hit() != std::nullopt) {
+						tuple ref_collision_point = reflected_ray.position(reflected_ray.get_hit()->t);
+						ref_collision_point = ref_collision_point + reflected_ray.get_hit()->obj->get_unary_normal_at(ref_collision_point).direction*0.05;
+						ref_collision_point.type = POINT;
+						ray ref_shadow_ray{ref_collision_point, (w->lightsources[0].position - ref_collision_point).unary()};
+						ref_shadow_ray.collide_with(&(w->objects));
+						illumination = reflected_ray.get_illumination(w->lightsources[0], ref_shadow_ray.get_hit()!=std::nullopt)* r.get_hit()->obj->mat.reflectiveness;
+					}
+
+				}
+				illumination = illumination + r.get_illumination(w->lightsources[0], inShadow)*(1 - r.get_hit()->obj->mat.reflectiveness);
 			}
-			illumination = r.get_illumination(w->lightsources[0], inShadow);
+
 			screen->set_pixel(j, i, illumination);
 		}
 	}

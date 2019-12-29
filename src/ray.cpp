@@ -92,7 +92,7 @@ color ray::get_illumination(light &lightsource, bool inShadow)
 	if (ldotn > 0) {
 		diffuse = effective_color * hit->obj->mat.diffuse * ldotn;
 		double ref = -(-lightvector - normal_vector*2*((-lightvector)*normal_vector))*direction;
-		if (ref > 0) {
+		if (ref > 0 & (hit->obj->mat.shinyness > 0)) {
 				specular = lightsource.intensity * hit->obj->mat.specular * pow(ref, hit->obj->mat.shinyness);
 		}
 	}
