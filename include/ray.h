@@ -19,11 +19,13 @@ struct intersection
 
 struct ray
 {
-	ray (tuple origin, tuple direction) : origin{origin},direction{direction} {}
+	ray (tuple origin, tuple direction, int allowed_bounces = 0) : origin{origin},direction{direction},allowed_bounces{allowed_bounces} {}
 
 	tuple origin;
 	tuple direction;
 	std::vector<intersection> collisions;
+	//Raycasting is recursive until a maximum "bounce" depth
+	int allowed_bounces;
 
 	tuple position(double t);
 
