@@ -14,7 +14,7 @@ color canvas::get_pixel(int width, int height)
 	return pixels[width][height];
 }
 
-void canvas::set_pixel(int width, int height, color& c)
+void canvas::set_pixel(int width, int height, color c)
 {
 	pixels[width][height] = c;
 }

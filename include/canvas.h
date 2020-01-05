@@ -24,7 +24,7 @@ struct canvas {
 	}
 
 	color get_pixel(int width, int height);
-	void set_pixel(int width, int height, color& c);
+	void set_pixel(int width, int height, color c);
 	void save_to_disk(const char* filename);
 
 	int width;

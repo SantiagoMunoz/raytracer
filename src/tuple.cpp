@@ -9,6 +9,9 @@ tuple tuple::operator+(const tuple& A)
 {
 	tuple res{x + A.x, y + A.y, z + A.z, VECTOR};
 
+	if (type == POINT && A.type == VECTOR)
+		res.type = POINT;
+
 	return res;
 }
 

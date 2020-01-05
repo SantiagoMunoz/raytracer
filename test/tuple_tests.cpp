@@ -29,7 +29,7 @@ TEST(TupleTest, Comparison)
 
 	ASSERT_TRUE(p_a == p_b);
 	ASSERT_TRUE(v_a == v_b);
-}	
+}
 
 TEST(TupleTest, Addition)
 {
@@ -41,7 +41,7 @@ TEST(TupleTest, Addition)
 	ASSERT_TRUE(is_equal(2.2, d.x));
 	ASSERT_TRUE(is_equal(3.3, d.y));
 	ASSERT_TRUE(is_equal(4.4, d.z));
-	ASSERT_EQ(d.type, VECTOR);
+	ASSERT_EQ(d.type, POINT);
 
 	tuple e = b + c;
 	ASSERT_EQ(e.type, VECTOR);
