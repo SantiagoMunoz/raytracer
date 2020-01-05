@@ -13,6 +13,5 @@
 * [X] Planes
 * [x] Shadows
 * [x] Secondary reflections
-* [ ] Cubes
 
 May grow in the future
