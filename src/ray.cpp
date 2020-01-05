@@ -12,7 +12,11 @@ void ray::collide_with(object *o)
 	std::vector<double>::iterator it;
 
 	for(it = cols.begin(); it < cols.end(); it++)
-		collisions.push_back(intersection{(*it), o});
+		//Maintain the lowest valid collision a the front of the vector
+		if ( !collisions.empty() && ( collisions[0].t < 0 || ((*it < collisions[0].t) && (*it > 0))))
+			collisions.insert(collisions.begin(), intersection{*it, o});
+		else
+			collisions.push_back(intersection{(*it), o});
 }
 
 void ray::collide_with(std::vector<object*> *objects)
@@ -36,23 +40,9 @@ std::optional<intersection> ray::get_hit()
 	intersection *current_min = NULL;
 	std::vector<intersection>::iterator it;
 
-	if (collisions.size() == 0)
+	if (collisions.empty() || (collisions[0].t < 0))
 		return std::nullopt;
-
-	for(it = collisions.begin(); it < collisions.end(); it++) {
-		if ((*it).t < 0)
-			continue;
-		if (!current_min)
-			current_min = &(*it);
-		else if ((*it).t < current_min->t)
-			current_min = &(*it);
-	}
-
-	if (!current_min)
-		return std::nullopt;
-	else
-		return std::make_optional<intersection>(*current_min);
-
+	return std::make_optional<intersection>(collisions[0]);
 }
 
 ray ray::get_transformed(matrix t)
