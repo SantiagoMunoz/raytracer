@@ -1,6 +1,8 @@
 # Raytracer
 
-## Status
+A personal toy/exploratory implementation of raytracer mechanics.
+
+## Current Status
 
 ![Demo](demo.jpg)
 
@@ -13,5 +15,5 @@
 * [X] Planes
 * [x] Shadows
 * [x] Secondary reflections
-
-May grow in the future
+* [ ] Patterns
+* [ ] Cubes
