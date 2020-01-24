@@ -25,7 +25,7 @@ void camera::render(world* w)
 	}
 }
 
-color world::castRay(ray r)
+color world::castRay(ray &r)
 {
 	color result{0,0,0};
 	bool inShadow = false;
@@ -50,7 +50,7 @@ color world::castRay(ray r)
 		if  (ref > 0) {
 			tuple collision_normal = collision->obj->get_unary_normal_at(collision_point).direction;
 			r.origin= collision_point;
-			r.direction = r.reflect(collision_normal).direction;
+			r.direction = r.get_reflected_direction(collision_normal);
 				result = result*(1 - ref) + castRay(r)*ref;
 		}
 	}

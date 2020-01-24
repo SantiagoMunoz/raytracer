@@ -23,16 +23,6 @@ void ray::collide_with(std::vector<object*> *objects)
 {
 	for(std::vector<object*>::iterator it = objects->begin(); it < objects->end(); it++)
 		collide_with(*it);
-
-	//if (get_hit() != std::nullopt) {
-		//tuple pos = position(get_hit()->t);
-		////To avoid acne, move a little hit away from the object
-		//pos = pos + get_hit()->obj->get_unary_normal_at(pos).direction * 0.01;
-		//ray to_lightsource = lightsource.origin - pos;
-		//to_lightsource.collide_with(objects);
-		//if (to_lightsource.get_hit() != std::nullopt)
-			//get_hit()->inShadow = true;
-	//}
 }
 
 std::optional<intersection> ray::get_hit()
@@ -53,8 +43,13 @@ ray ray::get_transformed(matrix t)
 
 ray ray::reflect(tuple &normal)
 {
-	ray r{origin, direction - normal*2*(direction*normal)};
+	ray r{origin, direction - normal*2*(direction*normal), allowed_bounces-1};
 	return r;
+}
+
+tuple ray::get_reflected_direction(tuple &normal)
+{
+	return direction - normal*2*(direction*normal);
 }
 
 color ray::get_illumination(light &lightsource, bool inShadow)

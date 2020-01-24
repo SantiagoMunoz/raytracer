@@ -11,7 +11,7 @@ struct world
     std::vector<object*> objects;
     std::vector<light> lightsources;
 
-    color castRay(ray r);
+    color castRay(ray &r);
     bool isPointInShadow(tuple point, light lightsource);
 };
 

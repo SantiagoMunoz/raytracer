@@ -35,6 +35,7 @@ struct ray
 	void collide_with(std::vector<object*> *objects);
 	std::optional<intersection> get_hit();
 	ray reflect(tuple &normal);
+	tuple get_reflected_direction(tuple &normal);
 	color get_illumination(light &lightsource, bool inShadow);
 };
 
